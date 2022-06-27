@@ -2,7 +2,7 @@
   "name": "github-search-app",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://M-Wahid.github.io",
+  "homepage": "http://M-Wahid.github.io/github-search-app",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",
