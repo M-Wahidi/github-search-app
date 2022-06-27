@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser, setLoading, setError } from "../features/user/userSlice";
+import axios from "axios";
+
 function Search() {
+  const dispatch = useDispatch();
+  const [serchQuery, setSearchQuery] = useState("");
+  const { theme } = useSelector((state) => state);
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    dispatch(setLoading(true));
+    try {
+      const { data } = await axios.get(
+        `https://api.github.com/users/${serchQuery}`
+      );
+      dispatch(getUser(data));
+    } catch (error) {
+      dispatch(setError(error.message));
+    }
+    dispatch(setLoading(false));
+    setSearchQuery("");
+  };
+
   return (
     <div style={{ marginTop: "2rem" }}>
       <form
+        onSubmit={handleSearch}
         style={{
           width: "100%",
           height: "60px",
@@ -11,7 +35,12 @@ function Search() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "#1F2A48",
+          background: `${theme ? "#fff" : "#1F2A48"}`,
+          color: `${theme ? "#111" : "#fff"}`,
+          boxShadow: `${
+            theme ? "0px 2px 0px 0px lightgray" : "0px 2px 0px 0px #222"
+          }`,
+
           borderRadius: "6px",
           position: "relative",
         }}
@@ -28,12 +57,14 @@ function Search() {
           <FiSearch />
         </span>
         <input
+          onChange={(e) => setSearchQuery(e.target.value)}
+          value={serchQuery}
           style={{
             width: "100%",
             height: "100%",
             backgroundColor: "transparent",
             border: "none",
-            color: "#fff",
+            color: `${theme ? "#111" : "#fff"}`,
             fontSize: "1rem",
             paddingLeft: "3rem",
           }}
