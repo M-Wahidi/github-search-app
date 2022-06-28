@@ -11,11 +11,10 @@ function Search() {
 
   const handleSearch = async (e) => {
     e.preventDefault();
+    dispatch(setError(false));
     dispatch(setLoading(true));
     try {
-      const { data } = await axios.get(
-        `https://api.github.com/users/${serchQuery}`
-      );
+      const { data } = await axios.get(`https://api.github.com/users/${serchQuery}`);
       dispatch(getUser(data));
     } catch (error) {
       dispatch(setError(error.message));
@@ -37,9 +36,7 @@ function Search() {
           alignItems: "center",
           background: `${theme ? "#fff" : "#1F2A48"}`,
           color: `${theme ? "#111" : "#fff"}`,
-          boxShadow: `${
-            theme ? "0px 2px 0px 0px lightgray" : "0px 2px 0px 0px #222"
-          }`,
+          boxShadow: `${theme ? "0px 2px 0px 0px lightgray" : "0px 2px 0px 0px #222"}`,
 
           borderRadius: "6px",
           position: "relative",
@@ -68,12 +65,12 @@ function Search() {
             fontSize: "1rem",
             paddingLeft: "3rem",
           }}
-          type="text"
-          placeholder="Search GitHub username..."
+          type='text'
+          placeholder='Search GitHub username...'
         />
         <input
-          type="submit"
-          value="Search"
+          type='submit'
+          value='Search'
           style={{
             border: "none",
             height: "70%",

@@ -17,27 +17,22 @@ function Content() {
     return <h1 style={{ marginTop: "1rem" }}>Loading...</h1>;
   }
   if (error) {
-    return <h1 style={{ marginTop: "1rem" }}>Error {error}</h1>;
+    return <h1 style={{ marginTop: "1rem" }}>Not Found</h1>;
   }
   return (
     <>
       <div
-        className="content-container"
+        className='content-container'
         style={{
           background: `${theme ? "#fff" : "#1F2A48"}`,
           color: `${theme ? "#111" : "#fff"}`,
           display: `${width < 650 ? "flex" : "grid"}`,
-          boxShadow: `${
-            theme ? "0px 2px 0px 0px lightgray" : "0px 2px 0px 0px #222"
-          }`,
+          boxShadow: `${theme ? "0px 2px 0px 0px lightgray" : "0px 2px 0px 0px #222"}`,
         }}
       >
         {width > 650 && (
-          <div className="user-profilePic">
-            <img
-              src={data?.avatar_url || "https://via.placeholder.com/150"}
-              alt="profile-pic"
-            />
+          <div className='user-profilePic'>
+            <img src={data?.avatar_url || "https://via.placeholder.com/150"} alt='profile-pic' />
           </div>
         )}
         <div
@@ -55,21 +50,15 @@ function Content() {
               gap: "1rem",
               paddingTop: `${width < 650 ? "0" : "3rem"}`,
             }}
-            className="user-contnet"
+            className='user-contnet'
           >
             {width < 650 && (
-              <div
-                className="user-profilePic"
-                style={{ margin: `${width < 650 ? "1rem" : ""}` }}
-              >
-                <img
-                  src={data?.avatar_url || "https://via.placeholder.com/150"}
-                  alt="profile-pic"
-                />
+              <div className='user-profilePic' style={{ margin: `${width < 650 ? "1rem" : ""}` }}>
+                <img src={data?.avatar_url || "https://via.placeholder.com/150"} alt='profile-pic' />
               </div>
             )}
             <div
-              className="content-header"
+              className='content-header'
               style={{
                 display: `${width < 650 ? "flex" : "flex"}`,
                 flexDirection: `${width < 650 ? "column" : "row"}`,
@@ -93,9 +82,7 @@ function Content() {
                   textAlign: `${width < 650 ? "left" : "right"}`,
                 }}
               >
-                {data?.created_at
-                  ? `Joined ${formatDate(data?.created_at)}`
-                  : "Not Found"}
+                {data?.created_at ? `Joined ${formatDate(data?.created_at)}` : "Not Found"}
               </div>
             </div>
           </div>
@@ -108,14 +95,11 @@ function Content() {
 
                 width: "100%",
               }}
-              className="user-bio"
+              className='user-bio'
             >
               {data?.bio || "Not Found"}
             </div>
-            <div
-              className="content-stats"
-              style={{ background: `${theme ? "#F5F8FF" : "#141C2F"}` }}
-            >
+            <div className='content-stats' style={{ background: `${theme ? "#F5F8FF" : "#141C2F"}` }}>
               <div>
                 <div>Repo</div>
                 <div>{data?.public_repos}</div>
@@ -131,7 +115,7 @@ function Content() {
             </div>
 
             <div
-              className="content-links"
+              className='content-links'
               style={{
                 display: `${width < 650 ? "flex" : "grid"}`,
                 flexDirection: `${width < 650 ? "column" : ""}`,
@@ -146,17 +130,13 @@ function Content() {
               </div>
               <div>
                 <a
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target='_blank'
+                  rel='noopener noreferrer'
                   style={{
                     color: `${theme ? "#111" : "#fff"}`,
                     textDecoration: "none",
                   }}
-                  href={
-                    data?.twitter_username
-                      ? `https://www.twitter.com/${data?.twitter_username}`
-                      : "https://www.twitter.com"
-                  }
+                  href={data?.twitter_username ? `https://www.twitter.com/${data?.twitter_username}` : "https://www.twitter.com"}
                 >
                   <span style={{ marginRight: "5px" }}>
                     <IoLogoTwitter />
@@ -166,8 +146,8 @@ function Content() {
               </div>
               <div>
                 <a
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target='_blank'
+                  rel='noopener noreferrer'
                   style={{
                     color: `${theme ? "#111" : "#fff"}`,
                     textDecoration: "none",
