@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, setLoading, setError } from "../features/user/userSlice";
@@ -6,15 +6,15 @@ import axios from "axios";
 
 function Search() {
   const dispatch = useDispatch();
-  const [serchQuery, setSearchQuery] = useState("");
+  const [serchQuery, setSearchQuery] = useState("M-Wahidi");
   const { theme } = useSelector((state) => state);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    dispatch(setError(false));
+  const getUserData = async () => {
     dispatch(setLoading(true));
     try {
-      const { data } = await axios.get(`https://api.github.com/users/${serchQuery}`);
+      const { data } = await axios.get(
+        `https://api.github.com/users/${serchQuery}`
+      );
       dispatch(getUser(data));
     } catch (error) {
       dispatch(setError(error.message));
@@ -22,6 +22,15 @@ function Search() {
     dispatch(setLoading(false));
     setSearchQuery("");
   };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    getUserData();
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   return (
     <div style={{ marginTop: "2rem" }}>
@@ -36,7 +45,9 @@ function Search() {
           alignItems: "center",
           background: `${theme ? "#fff" : "#1F2A48"}`,
           color: `${theme ? "#111" : "#fff"}`,
-          boxShadow: `${theme ? "0px 2px 0px 0px lightgray" : "0px 2px 0px 0px #222"}`,
+          boxShadow: `${
+            theme ? "0px 2px 0px 0px lightgray" : "0px 2px 0px 0px #222"
+          }`,
 
           borderRadius: "6px",
           position: "relative",
@@ -65,12 +76,12 @@ function Search() {
             fontSize: "1rem",
             paddingLeft: "3rem",
           }}
-          type='text'
-          placeholder='Search GitHub username...'
+          type="text"
+          placeholder="Search GitHub username..."
         />
         <input
-          type='submit'
-          value='Search'
+          type="submit"
+          value="Search"
           style={{
             border: "none",
             height: "70%",
